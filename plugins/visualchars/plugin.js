@@ -28,12 +28,12 @@ var visualchars = (function () {
     };
     return { isEnabled: isEnabled };
   };
-  var $_2v9r8stjkmcdy31 = { get: get };
+  var $_5d64tmstjl265k8z = { get: get };
 
   var fireVisualChars = function (editor, state) {
     return editor.fire('VisualChars', { state: state });
   };
-  var $_g6p8tbswjkmcdy33 = { fireVisualChars: fireVisualChars };
+  var $_abfmycswjl265k94 = { fireVisualChars: fireVisualChars };
 
   var charMap = {
     '\xA0': 'nbsp',
@@ -56,7 +56,7 @@ var visualchars = (function () {
     }
     return selector;
   };
-  var $_5gypflsyjkmcdy3d = {
+  var $_5ntlq0syjl265k9l = {
     charMap: charMap,
     regExp: charMapToRegExp(charMap),
     regExpGlobal: charMapToRegExp(charMap, true),
@@ -308,7 +308,7 @@ var visualchars = (function () {
     fromPoint: fromPoint
   };
 
-  var $_5rg4s0t7jkmcdy4g = {
+  var $_557iwft7jl265kbc = {
     ATTRIBUTE: Node.ATTRIBUTE_NODE,
     CDATA_SECTION: Node.CDATA_SECTION_NODE,
     COMMENT: Node.COMMENT_NODE,
@@ -339,12 +339,12 @@ var visualchars = (function () {
     };
   };
   var isComment = function (element) {
-    return type(element) === $_5rg4s0t7jkmcdy4g.COMMENT || name(element) === '#comment';
+    return type(element) === $_557iwft7jl265kbc.COMMENT || name(element) === '#comment';
   };
-  var isElement = isType$1($_5rg4s0t7jkmcdy4g.ELEMENT);
-  var isText = isType$1($_5rg4s0t7jkmcdy4g.TEXT);
-  var isDocument = isType$1($_5rg4s0t7jkmcdy4g.DOCUMENT);
-  var $_56e4lwt6jkmcdy4f = {
+  var isElement = isType$1($_557iwft7jl265kbc.ELEMENT);
+  var isText = isType$1($_557iwft7jl265kbc.TEXT);
+  var isDocument = isType$1($_557iwft7jl265kbc.DOCUMENT);
+  var $_5anfgqt6jl265kba = {
     name: name,
     type: type,
     value: value,
@@ -355,12 +355,12 @@ var visualchars = (function () {
   };
 
   var wrapCharWithSpan = function (value) {
-    return '<span data-mce-bogus="1" class="mce-' + $_5gypflsyjkmcdy3d.charMap[value] + '">' + value + '</span>';
+    return '<span data-mce-bogus="1" class="mce-' + $_5ntlq0syjl265k9l.charMap[value] + '">' + value + '</span>';
   };
-  var $_12tebnt8jkmcdy4i = { wrapCharWithSpan: wrapCharWithSpan };
+  var $_3b8zhat8jl265kbf = { wrapCharWithSpan: wrapCharWithSpan };
 
   var isMatch = function (n) {
-    return $_56e4lwt6jkmcdy4f.isText(n) && $_56e4lwt6jkmcdy4f.value(n) !== undefined && $_5gypflsyjkmcdy3d.regExp.test($_56e4lwt6jkmcdy4f.value(n));
+    return $_5anfgqt6jl265kba.isText(n) && $_5anfgqt6jl265kba.value(n) !== undefined && $_5ntlq0syjl265k9l.regExp.test($_5anfgqt6jl265kba.value(n));
   };
   var filterDescendants = function (scope, predicate) {
     var result = [];
@@ -383,9 +383,9 @@ var visualchars = (function () {
     }
   };
   var replaceWithSpans = function (html) {
-    return html.replace($_5gypflsyjkmcdy3d.regExpGlobal, $_12tebnt8jkmcdy4i.wrapCharWithSpan);
+    return html.replace($_5ntlq0syjl265k9l.regExpGlobal, $_3b8zhat8jl265kbf.wrapCharWithSpan);
   };
-  var $_9rt6vkszjkmcdy3e = {
+  var $_fqbp3uszjl265k9n = {
     isMatch: isMatch,
     filterDescendants: filterDescendants,
     findParentElm: findParentElm,
@@ -394,9 +394,9 @@ var visualchars = (function () {
 
   var show = function (editor, rootElm) {
     var node, div;
-    var nodeList = $_9rt6vkszjkmcdy3e.filterDescendants(Element$$1.fromDom(rootElm), $_9rt6vkszjkmcdy3e.isMatch);
+    var nodeList = $_fqbp3uszjl265k9n.filterDescendants(Element$$1.fromDom(rootElm), $_fqbp3uszjl265k9n.isMatch);
     each(nodeList, function (n) {
-      var withSpans = $_9rt6vkszjkmcdy3e.replaceWithSpans($_56e4lwt6jkmcdy4f.value(n));
+      var withSpans = $_fqbp3uszjl265k9n.replaceWithSpans($_5anfgqt6jl265kba.value(n));
       div = editor.dom.create('div', null, withSpans);
       while (node = div.lastChild) {
         editor.dom.insertAfter(node, n.dom());
@@ -405,7 +405,7 @@ var visualchars = (function () {
     });
   };
   var hide = function (editor, body) {
-    var nodeList = editor.dom.select($_5gypflsyjkmcdy3d.selector, body);
+    var nodeList = editor.dom.select($_5ntlq0syjl265k9l.selector, body);
     each(nodeList, function (node) {
       editor.dom.remove(node, 1);
     });
@@ -413,13 +413,13 @@ var visualchars = (function () {
   var toggle = function (editor) {
     var body = editor.getBody();
     var bookmark = editor.selection.getBookmark();
-    var parentNode = $_9rt6vkszjkmcdy3e.findParentElm(editor.selection.getNode(), body);
+    var parentNode = $_fqbp3uszjl265k9n.findParentElm(editor.selection.getNode(), body);
     parentNode = parentNode !== undefined ? parentNode : body;
     hide(editor, parentNode);
     show(editor, parentNode);
     editor.selection.moveToBookmark(bookmark);
   };
-  var $_3do19ssxjkmcdy34 = {
+  var $_53ek92sxjl265k95 = {
     show: show,
     hide: hide,
     toggle: toggle
@@ -430,39 +430,39 @@ var visualchars = (function () {
     var selection = editor.selection;
     var bookmark;
     toggleState.set(!toggleState.get());
-    $_g6p8tbswjkmcdy33.fireVisualChars(editor, toggleState.get());
+    $_abfmycswjl265k94.fireVisualChars(editor, toggleState.get());
     bookmark = selection.getBookmark();
     if (toggleState.get() === true) {
-      $_3do19ssxjkmcdy34.show(editor, body);
+      $_53ek92sxjl265k95.show(editor, body);
     } else {
-      $_3do19ssxjkmcdy34.hide(editor, body);
+      $_53ek92sxjl265k95.hide(editor, body);
     }
     selection.moveToBookmark(bookmark);
   };
-  var $_d65yvksvjkmcdy32 = { toggleVisualChars: toggleVisualChars };
+  var $_b7cf1jsvjl265k92 = { toggleVisualChars: toggleVisualChars };
 
   var register = function (editor, toggleState) {
     editor.addCommand('mceVisualChars', function () {
-      $_d65yvksvjkmcdy32.toggleVisualChars(editor, toggleState);
+      $_b7cf1jsvjl265k92.toggleVisualChars(editor, toggleState);
     });
   };
-  var $_3dnsglsujkmcdy32 = { register: register };
+  var $_b9xbs3sujl265k91 = { register: register };
 
   var global$1 = tinymce.util.Tools.resolve('tinymce.util.Delay');
 
   var setup = function (editor, toggleState) {
     var debouncedToggle = global$1.debounce(function () {
-      $_3do19ssxjkmcdy34.toggle(editor);
+      $_53ek92sxjl265k95.toggle(editor);
     }, 300);
     if (editor.settings.forced_root_block !== false) {
       editor.on('keydown', function (e) {
         if (toggleState.get() === true) {
-          e.keyCode === 13 ? $_3do19ssxjkmcdy34.toggle(editor) : debouncedToggle();
+          e.keyCode === 13 ? $_53ek92sxjl265k95.toggle(editor) : debouncedToggle();
         }
       });
     }
   };
-  var $_7g6x57t9jkmcdy4j = { setup: setup };
+  var $_53z6yt9jl265kbh = { setup: setup };
 
   var toggleActiveState = function (editor) {
     return function (e) {
@@ -491,10 +491,10 @@ var visualchars = (function () {
 
   global.add('visualchars', function (editor) {
     var toggleState = Cell(false);
-    $_3dnsglsujkmcdy32.register(editor, toggleState);
+    $_b9xbs3sujl265k91.register(editor, toggleState);
     register$1(editor);
-    $_7g6x57t9jkmcdy4j.setup(editor, toggleState);
-    return $_2v9r8stjkmcdy31.get(toggleState);
+    $_53z6yt9jl265kbh.setup(editor, toggleState);
+    return $_5d64tmstjl265k8z.get(toggleState);
   });
   function Plugin () {
   }
